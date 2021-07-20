@@ -1,0 +1,49 @@
+CREATE TABLE IF NOT EXISTS customer (
+cus_id int,
+cus_nom varchar(30),
+cus_prenom varchar(30),
+cus_num int UNIQUE,
+cus_part varchar(50),
+cus_pro varchar(50)
+,CONSTRAINT customer_PK PRIMARY KEY (cus_id)
+);
+
+CREATE TABLE IF NOT EXISTS cars (
+car_id int,
+car_part varchar(50),
+car_utilitaire varchar(50),
+car_neuf varchar(50),
+car_occas varchar(50)
+,CONSTRAINT cars_PK PRIMARY KEY (car_id)
+);
+
+CREATE TABLE IF NOT EXISTS employee (
+id_emp int,
+emp_poste varchar(50) NOT NULL,
+emp_nom varchar(30) NOT NULL,
+emp_prenom varchar(30) NOT NULL
+,CONSTRAINT employee_PK PRIMARY KEY (id_emp)
+);
+
+CREATE TABLE IF NOT EXISTS service (
+serv_id int,
+serv_vente varchar(255),
+serv_repar varchar(255),
+serv_entretien varchar(255)
+,CONSTRAINT serevice_PK PRIMARY KEY (serv_id)
+);
+
+CREATE TABLE IF NOT EXISTS paiements (
+id_paie int,
+paie_credit DECIMAL(2,2)  NOT NULL,
+paie_comptant DECIMAL(2,2) NOT NULL
+,CONSTRAINT paiement_PK PRIMARY KEY (id_paie)
+);
+
+CREATE TABLE contrats (
+id_emp Int NOT NULL,
+id_cli Int NOT NULL
+,CONSTRAINT contrat PRIMARY KEY (id_emp,id_cli)
+,CONSTRAINT contrat_employee_FK FOREIGN KEY (id_emp) REFERENCES employee (id_emp)
+,CONSTRAINT contrat_client_FK FOREIGN KEY (id_cli) REFERENCES client (id_cli)
+);
